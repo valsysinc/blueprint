@@ -66,8 +66,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:palantir/blueprint.git"
+    "url": "git@github.com:valsysinc/blueprint.git"
   },
   "author": "Palantir Technologies",
+  "contributors": ["Valsys Inc."],
   "license": "Apache-2.0"
 }

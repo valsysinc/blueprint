@@ -1,6 +1,6 @@
 {
-  "name": "@blueprintjs/table",
-  "version": "3.8.3",
+  "name": "@vsjs/table",
+  "version": "3.8.3+vsjs.1",
   "description": "Scalable interactive table component",
   "main": "lib/cjs/index.js",
   "module": "lib/esm/index.js",
@@ -63,7 +63,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:palantir/blueprint.git",
+    "url": "git@github.com:valsysinc/blueprint.git",
     "directory": "packages/table"
   },
   "keywords": [
@@ -74,5 +74,6 @@
     "spreadsheet"
   ],
   "author": "Palantir Technologies",
+  "contributors": ["Valsys Inc."],
   "license": "Apache-2.0"
 }
