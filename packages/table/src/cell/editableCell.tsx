@@ -71,6 +71,11 @@ export interface IEditableCellProps extends ICellProps {
      * Props that should be passed to the EditableText when it is used to edit
      */
     editableTextProps?: IEditableTextProps;
+
+    /**
+     * Whether the cell's editable functionality is active.
+     */
+    editable?: boolean;
 }
 
 export interface IEditableCellState {
@@ -223,7 +228,10 @@ export class EditableCell extends React.Component<IEditableCellProps, IEditableC
     };
 
     private handleEdit = () => {
-        this.setState({ isEditing: true, dirtyValue: this.state.savedValue });
+        const { editable } = this.props;
+        if (editable) {
+            this.setState({ isEditing: true, dirtyValue: this.state.savedValue });
+        }
     };
 
     private handleCancel = (value: string) => {
