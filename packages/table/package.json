@@ -1,6 +1,6 @@
 {
   "name": "@vsjs/table",
-  "version": "3.8.3-vsjs.1.0.2",
+  "version": "3.8.3-vsjs.1.0.3",
   "description": "Scalable interactive table component",
   "main": "lib/cjs/index.js",
   "module": "lib/esm/index.js",
