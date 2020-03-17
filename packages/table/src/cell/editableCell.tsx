@@ -23,7 +23,7 @@ import {
     Hotkeys,
     HotkeysTarget,
     IEditableTextProps,
-    Utils as CoreUtils,
+    Utils as CoreUtils
 } from "@blueprintjs/core";
 
 import * as Classes from "../common/classes";
@@ -57,7 +57,7 @@ export interface IEditableCellProps extends ICellProps {
      * callback will also receive the row index and column index if they were
      * originally provided via props.
      */
-    onChange?: (value: string, rowIndex?: number, columnIndex?: number) => void;
+    onChange?: (value: string | Event, rowIndex?: number, columnIndex?: number) => void;
 
     /**
      * A listener that is triggered once the editing is confirmed. This is
@@ -90,21 +90,21 @@ export class EditableCell extends React.Component<IEditableCellProps, IEditableC
 
     public static defaultProps = {
         truncated: true,
-        wrapText: false,
+        wrapText: false
     };
 
     private cellRef: HTMLElement;
     private refHandlers = {
         cell: (ref: HTMLElement) => {
             this.cellRef = ref;
-        },
+        }
     };
 
     public constructor(props: IEditableCellProps, context?: any) {
         super(props, context);
         this.state = {
             isEditing: false,
-            savedValue: props.value,
+            savedValue: props.value
         };
     }
 
@@ -169,7 +169,7 @@ export class EditableCell extends React.Component<IEditableCellProps, IEditableC
         } else {
             const textClasses = classNames(Classes.TABLE_EDITABLE_TEXT, {
                 [Classes.TABLE_TRUNCATED_TEXT]: truncated,
-                [Classes.TABLE_NO_WRAP_TEXT]: !wrapText,
+                [Classes.TABLE_NO_WRAP_TEXT]: !wrapText
             });
 
             cellContents = <div className={textClasses}>{savedValue}</div>;
@@ -219,9 +219,13 @@ export class EditableCell extends React.Component<IEditableCellProps, IEditableC
         }
     }
 
-    private handleKeyPress = () => {
-        const { editable } = this.props;
+    private handleKeyPress = (e: Event) => {
+        const { editable, onChange } = this.props;
         if (this.state.isEditing || !this.props.isFocused || !editable) {
+            return;
+        }
+        if (!editable) {
+            onChange(e);
             return;
         }
 
