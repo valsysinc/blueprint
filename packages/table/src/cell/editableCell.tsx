@@ -219,13 +219,13 @@ export class EditableCell extends React.Component<IEditableCellProps, IEditableC
         }
     }
 
-    private handleKeyPress = (e: Event) => {
+    private handleKeyPress = (event: any) => {
         const { editable, onChange } = this.props;
         if (this.state.isEditing || !this.props.isFocused || !editable) {
             return;
         }
         if (!editable) {
-            onChange(e);
+            onChange(event);
             return;
         }
 
