@@ -1,5 +1,5 @@
 {
-  "name": "@vsjs/table",
+  "name": "table",
   "version": "3.8.9-vsjs.1.0.6",
   "description": "Scalable interactive table component",
   "main": "lib/cjs/index.js",
@@ -74,7 +74,9 @@
     "spreadsheet"
   ],
   "author": "Palantir Technologies",
-  "contributors": ["Valsys Inc."],
+  "contributors": [
+    "Valsys Inc."
+  ],
   "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/palantir/blueprint/issues"
