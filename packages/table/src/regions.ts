@@ -81,7 +81,9 @@ export enum TableLoadingOption {
 
 export interface IStyledRegionGroup {
     className?: string;
+    focus?: string;
     regions: IRegion[];
+    selection?: string;
 }
 
 /**
@@ -582,17 +584,27 @@ export class Regions {
         focusedCell: IFocusedCellCoordinates,
     ) {
         let regionGroups: IStyledRegionGroup[] = [];
+        let focusOverridden = false;
+        let selectionOverridden = false;
         if (otherRegions != null) {
+            otherRegions.forEach(region => {
+                if (region.focus) {
+                    focusOverridden = true;
+                }
+                if (region.selection) {
+                    selectionOverridden = true;
+                }
+            });
             regionGroups = regionGroups.concat(otherRegions);
         }
-        if (selectedRegions != null && selectedRegions.length > 0) {
+        if (selectedRegions != null && selectedRegions.length > 0 && !selectionOverridden) {
             regionGroups.push({
                 className: Classes.TABLE_SELECTION_REGION,
                 regions: selectedRegions,
             });
         }
 
-        if (focusedCell != null) {
+        if (focusedCell != null && !focusOverridden) {
             regionGroups.push({
                 className: Classes.TABLE_FOCUS_REGION,
                 regions: [Regions.cell(focusedCell.row, focusedCell.col)],
