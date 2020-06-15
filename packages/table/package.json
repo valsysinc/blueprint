@@ -1,5 +1,5 @@
 {
-  "name": "table",
+  "name": "@vsjs/table",
   "version": "3.8.9-vsjs.1.0.6",
   "description": "Scalable interactive table component",
   "main": "lib/cjs/index.js",
