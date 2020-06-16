@@ -57,7 +57,7 @@ export interface IEditableCellProps extends ICellProps {
      * callback will also receive the row index and column index if they were
      * originally provided via props.
      */
-    onChange?: (value: string, rowIndex?: number, columnIndex?: number) => void;
+    onChange?: (value: string | Event, rowIndex?: number, columnIndex?: number) => void;
 
     /**
      * A listener that is triggered once the editing is confirmed. This is
@@ -71,6 +71,11 @@ export interface IEditableCellProps extends ICellProps {
      * Props that should be passed to the EditableText when it is used to edit
      */
     editableTextProps?: IEditableTextProps;
+
+    /**
+     * Prop to determine whether an editable cell is editable.
+     * */
+    editable?: boolean;
 }
 
 export interface IEditableCellState {
@@ -214,8 +219,13 @@ export class EditableCell extends React.Component<IEditableCellProps, IEditableC
         }
     }
 
-    private handleKeyPress = () => {
+    private handleKeyPress = (event: any) => {
+        const { editable, onChange } = this.props;
         if (this.state.isEditing || !this.props.isFocused) {
+            return;
+        }
+        if (!editable) {
+            onChange(event);
             return;
         }
         // setting dirty value to empty string because apparently the text field will pick up the key and write it in there
@@ -223,7 +233,10 @@ export class EditableCell extends React.Component<IEditableCellProps, IEditableC
     };
 
     private handleEdit = () => {
-        this.setState({ isEditing: true, dirtyValue: this.state.savedValue });
+        const { editable } = this.props;
+        if (editable) {
+            this.setState({ isEditing: true, dirtyValue: this.state.savedValue });
+        }
     };
 
     private handleCancel = (value: string) => {
